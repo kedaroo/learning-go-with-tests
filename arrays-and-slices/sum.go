@@ -10,7 +10,14 @@ func Sum(numbers []int) int {
 }
 
 func SumAll(slices ...[]int) []int {
-	var results []int
+	// this is slower 👇🏻, yields 38 ns/op in benchmarks
+	// var results []int
+
+	// this is faster 👇🏻, yield 20 ns/ops in benchmarks
+	/*
+	* this is faster because slice capacity is set at the time of its initialization
+	*/
+	results := make([]int, 0, len(slices))
 
 	for _, slice := range slices {
 		var sum int
@@ -21,6 +28,6 @@ func SumAll(slices ...[]int) []int {
 
 		results = append(results, sum)
 	}
-	
+
 	return results
 }

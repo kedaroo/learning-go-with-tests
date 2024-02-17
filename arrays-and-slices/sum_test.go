@@ -30,3 +30,12 @@ func TestSumAll(t *testing.T) {
 		}
 	}
 }
+
+func BenchmarkSumAll(b *testing.B) {
+	for range b.N {
+		slice1 := []int{1, 2, 3, 4, 5, 6, 7, 8, 9}
+		slice2 := []int{4, 5, 6, 7, 8, 9}
+
+		SumAll(slice1, slice2)
+	}
+}
