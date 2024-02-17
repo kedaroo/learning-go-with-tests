@@ -2,6 +2,7 @@ package arraysandslices
 
 import (
 	"fmt"
+	"slices"
 	"testing"
 )
 
@@ -53,4 +54,33 @@ func ExampleSumAll() {
 	sum := SumAll(input...)
 	fmt.Println(sum)
 	// Output: [7 7]
+}
+
+func TestSumAllTails(t *testing.T) {
+	checkSums := func(t testing.TB, got, want []int) {
+		if !slices.Equal(got, want) {
+			t.Errorf("got %v want %v", got, want)
+		}
+	}
+
+	t.Run("sum of tails of non-empty slices", func(t *testing.T) {
+		got := SumAllTails([]int{1, 2, 3}, []int{4, 5, 6})
+		want := []int{5, 11}
+
+		checkSums(t, got, want)
+	})
+
+	t.Run("sum of tails of empty slices", func(t *testing.T) {
+		got := SumAllTails([]int{}, []int{})
+		want := []int{0, 0}
+
+		checkSums(t, got, want)
+	})
+
+}
+
+func BenchmarkSumAllTails(b *testing.B) {
+	for range b.N {
+		SumAllTails([]int{1, 2, 3, 4, 5, 6}, []int{4, 5, 6, 7, 5, 4, 3, 2, 1})
+	}
 }

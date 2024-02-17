@@ -15,7 +15,7 @@ func SumAll(slices ...[]int) []int {
 
 	// this is faster 👇🏻, yield 20 ns/ops in benchmarks
 	/*
-	* this is faster because slice capacity is set at the time of its initialization
+	 * this is faster because slice capacity is set at the time of its initialization
 	 */
 	results := make([]int, 0, len(slices))
 
@@ -27,6 +27,20 @@ func SumAll(slices ...[]int) []int {
 		}
 
 		results = append(results, sum)
+	}
+
+	return results
+}
+
+func SumAllTails(slices ...[]int) []int {
+	results := make([]int, len(slices))
+
+	for i, slice := range slices {
+		if len(slice) > 0 {
+			results[i] = Sum(slice[1:])
+		} else {
+			results[i] = 0
+		}
 	}
 
 	return results
