@@ -16,7 +16,7 @@ func SumAll(slices ...[]int) []int {
 	// this is faster 👇🏻, yield 20 ns/ops in benchmarks
 	/*
 	* this is faster because slice capacity is set at the time of its initialization
-	*/
+	 */
 	results := make([]int, 0, len(slices))
 
 	for _, slice := range slices {

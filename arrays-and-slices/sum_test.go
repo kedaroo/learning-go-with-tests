@@ -1,6 +1,7 @@
 package arraysandslices
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -38,4 +39,18 @@ func BenchmarkSumAll(b *testing.B) {
 
 		SumAll(slice1, slice2)
 	}
+}
+
+func ExampleSum() {
+	input := []int{1, 2, 3, 4}
+	sum := Sum(input)
+	fmt.Println(sum)
+	// Output: 10
+}
+
+func ExampleSumAll() {
+	input := [][]int{{1, 2, 4}, {1, 2, 4}}
+	sum := SumAll(input...)
+	fmt.Println(sum)
+	// Output: [7 7]
 }
